@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditKittensComponent } from './edit-kittens.component';
+import { KittensFormComponent } from './kittens-form.component';
 
-describe('EditKittensComponent', () => {
-  let component: EditKittensComponent;
-  let fixture: ComponentFixture<EditKittensComponent>;
+describe('KittensFormComponent', () => {
+  let component: KittensFormComponent;
+  let fixture: ComponentFixture<KittensFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditKittensComponent ]
+      declarations: [ KittensFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditKittensComponent);
+    fixture = TestBed.createComponent(KittensFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import { AngularMaterialModule } from './material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddKittensComponent } from './components/add-kittens/add-kittens.component';
-import { EditKittensComponent } from './components/edit-kittens/edit-kittens.component';
+import { KittensFormComponent } from './components/kittens-form/kittens-form.component';
 import { KittensListComponent } from './components/kittens-list/kittens-list.component';
+
+import { ApiService } from './shared/services/api.service';
+import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddKittensComponent,
-    EditKittensComponent,
+    KittensFormComponent,
     KittensListComponent
   ],
   imports: [
@@ -22,8 +27,19 @@ import { KittensListComponent } from './components/kittens-list/kittens-list.com
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    {
+      provide: MAT_CHIPS_DEFAULT_OPTIONS,
+      useValue: {
+        separatorKeyCodes: [ENTER, COMMA]
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

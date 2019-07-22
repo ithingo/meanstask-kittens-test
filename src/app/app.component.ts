@@ -7,14 +7,9 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
 
   public isOpened: boolean = true;
-
-  public get isBiggerScreen() {
-    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    return width < 768;
-  }
 
   private toggleMenuBySize(innerWidth): void {
     if (innerWidth < 768) {
@@ -28,6 +23,11 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.toggleMenuBySize(window.innerWidth);
+  }
+
+  public isBiggerScreen() {
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return width < 768;
   }
 
   @HostListener('window:resize', ['$event'])

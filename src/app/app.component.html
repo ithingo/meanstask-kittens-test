@@ -10,13 +10,13 @@
   <!-- Sidenav -->
   <mat-sidenav
     #sidenav
-    [mode]="isBiggerScreen ? 'over' : 'side'"
+    [mode]="isBiggerScreen() ? 'over' : 'side'"
     [(opened)]="isOpened"
     [fixedInViewport]="true"
     [fixedTopGap]
   >
     <mat-nav-list>
-      <a mat-list-item routerLinkActive="active" routerLink="/add-kittens">
+      <a mat-list-item routerLinkActive="active" routerLink="/add-kitten">
         <mat-icon>add</mat-icon> Add Kitten
       </a>
       <a mat-list-item routerLinkActive="active" routerLink="/kittens">
