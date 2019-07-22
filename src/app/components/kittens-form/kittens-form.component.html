@@ -1,0 +1,90 @@
+<div class="title-group">
+  <h1 class="mat-h1">Add Kitten</h1>
+  <mat-divider fxFlex="1 0"></mat-divider>
+</div>
+
+<div class="inner-wrapper">
+  <form [formGroup]="kittenForm" (ngSubmit)="submitForm()">
+    <!-- Left block -->
+    <mat-card>
+      <div class="controlers-wrapper">
+        <!-- Name -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Kitten name" formControlName="kitten_name" autocomplete="off" />
+          <mat-error *ngIf="handleError('kitten_name', 'required')">
+            You must provide a <strong>kitten name</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Name -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Kitten breed" formControlName="kitten_breed" autocomplete="off" />
+          <mat-error *ngIf="handleError('kitten_breed', 'required')">
+            You must provide a <strong>kitten breed</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Country -->
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Country" formControlName="country" autocomplete="off" />
+          <mat-error *ngIf="handleError('country', 'required')">
+            You must provide a <strong>country name</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <!-- Right block -->
+    <mat-card>
+      <div class="controlers-wrapper">
+        <!-- Parents -->
+        <mat-form-field class="multiple-items">
+          <mat-chip-list #chipList>
+            <mat-chip
+              *ngFor="let parent of kittenParents"
+              [selectable]="config.isSelectable"
+              [removable]="config.isRemovable"
+              (removed)="removeParent(parent)"
+            >
+              {{ parent }}
+              <mat-icon matChipRemove *ngIf="config.isRemovable">x</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Add parents"
+              [matChipInputFor]="chipList"
+              [matChipInputAddOnBlur]="config.isAddedOnBlur"
+              (matChipInputTokenEnd)="addParent($event)"
+              autocomplete="off"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+
+        <!-- Date of birth -->
+        <mat-form-field>
+          <input
+            matInput
+            readonly
+            [matDatepicker]="picker"
+            placeholder="Date of birth"
+            formControlName="kitten_dob"
+            (dateChange)="formatDate($event)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="handleError('kitten_dob', 'required')">
+            Date of birth is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </mat-card>
+
+    <!-- Submit -->
+    <mat-card>
+      <div class="full-wrapper button-wrapper">
+        <div class="button-wrapper">
+          <button mat-flat-button color="warn" type="submit">{{editMode ? 'Update' : 'Add'}}</button>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+</div>
